@@ -7,4 +7,8 @@
     <string name="repo_stars_description">Stars</string>
     <string name="repo_watchers_description">Watchers</string>
     <string name="repo_open_issues_description">Open Issues</string>
+    <string name="repo_creation_date_label">Created:</string>
+    <string name="repo_updated_date_label">Last Updated:</string>
+    <string name="repo_home_button">Home</string>
+    <string name="repo_git_button">GitHub</string>
 </resources>
