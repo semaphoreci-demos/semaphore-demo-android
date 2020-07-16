@@ -11,4 +11,5 @@
     <string name="repo_updated_date_label">Last Updated:</string>
     <string name="repo_home_button">Home</string>
     <string name="repo_git_button">GitHub</string>
+    <string name="semaphore_icon_description">Semaphore</string>
 </resources>

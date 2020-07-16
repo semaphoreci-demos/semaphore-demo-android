@@ -33,7 +33,7 @@
             android:textAppearance="@style/AppTheme.Headline6"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/semaphore_icon" />
 
         <TextView
             android:id="@+id/repo_creation_date_label"
@@ -202,6 +202,17 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/repo_issue"
             app:layout_constraintTop_toTopOf="@+id/repo_issue" />
+
+        <ImageView
+            android:id="@+id/semaphore_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:contentDescription="@string/semaphore_icon_description"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_semaphore_text" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
