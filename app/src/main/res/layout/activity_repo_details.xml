@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.repolist.RepoListActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/repo_details_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:navigationIcon="@drawable/ic_close" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <TextView
+            android:id="@+id/repo_description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:textAppearance="@style/AppTheme.Headline6"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/semaphore_icon" />
+
+        <TextView
+            android:id="@+id/repo_creation_date_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/repo_creation_date_label"
+            android:textAppearance="@style/AppTheme.Body2"
+            app:layout_constraintStart_toStartOf="@+id/repo_description"
+            app:layout_constraintTop_toBottomOf="@+id/repo_description" />
+
+        <TextView
+            android:id="@+id/repo_update_date_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/repo_updated_date_label"
+            android:textAppearance="@style/AppTheme.Body2"
+            app:layout_constraintStart_toStartOf="@+id/repo_description"
+            app:layout_constraintTop_toBottomOf="@+id/repo_creation_date_label" />
+
+        <TextView
+            android:id="@+id/repo_language"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:textAppearance="@style/AppTheme.Body2"
+            app:layout_constraintStart_toStartOf="@+id/repo_description"
+            app:layout_constraintTop_toBottomOf="@+id/repo_update_date_label" />
+
+        <TextView
+            android:id="@+id/repo_creation_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:textAppearance="@style/AppTheme.Body2"
+            app:layout_constraintStart_toEndOf="@+id/repo_creation_date_label"
+            app:layout_constraintTop_toBottomOf="@+id/repo_description" />
+
+        <TextView
+            android:id="@+id/repo_update_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:textAppearance="@style/AppTheme.Body2"
+            app:layout_constraintStart_toEndOf="@+id/repo_update_date_label"
+            app:layout_constraintTop_toBottomOf="@+id/repo_creation_date" />
+
+        <Button
+            android:id="@+id/button_home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/repo_home_button"
+            app:icon="@drawable/ic_home"
+            app:layout_constraintEnd_toStartOf="@+id/button_git"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/repo_issue" />
+
+        <Button
+            android:id="@+id/button_git"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/repo_git_button"
+            app:icon="@drawable/ic_cloud"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/button_home"
+            app:layout_constraintTop_toTopOf="@+id/button_home" />
+
+        <ImageView
+            android:id="@+id/repo_fork"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:contentDescription="@string/repo_forks_description"
+            android:src="@drawable/ic_fork"
+            app:layout_constraintBottom_toBottomOf="@+id/repo_fork_count"
+            app:layout_constraintEnd_toStartOf="@+id/repo_fork_count"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/repo_fork_count" />
+
+        <TextView
+            android:id="@+id/repo_fork_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:textAppearance="?attr/textAppearanceCaption"
+            app:layout_constraintBottom_toBottomOf="@+id/repo_stars"
+            app:layout_constraintEnd_toStartOf="@+id/repo_stars"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/repo_fork"
+            app:layout_constraintTop_toTopOf="@+id/repo_stars" />
+
+        <ImageView
+            android:id="@+id/repo_stars"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:contentDescription="@string/repo_stars_description"
+            android:src="@drawable/ic_star"
+            app:layout_constraintBottom_toBottomOf="@+id/repo_stars_count"
+            app:layout_constraintEnd_toStartOf="@+id/repo_stars_count"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/repo_fork_count"
+            app:layout_constraintTop_toTopOf="@+id/repo_stars_count" />
+
+        <TextView
+            android:id="@+id/repo_stars_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:textAppearance="?attr/textAppearanceCaption"
+            app:layout_constraintBottom_toBottomOf="@+id/repo_watcher"
+            app:layout_constraintEnd_toStartOf="@+id/repo_watcher"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/repo_stars"
+            app:layout_constraintTop_toTopOf="@+id/repo_watcher" />
+
+        <ImageView
+            android:id="@+id/repo_watcher"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:contentDescription="@string/repo_watchers_description"
+            android:src="@drawable/ic_eye"
+            app:layout_constraintBottom_toBottomOf="@+id/repo_watcher_count"
+            app:layout_constraintEnd_toStartOf="@+id/repo_watcher_count"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/repo_stars_count"
+            app:layout_constraintTop_toTopOf="@+id/repo_watcher_count" />
+
+        <TextView
+            android:id="@+id/repo_watcher_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:textAppearance="?attr/textAppearanceCaption"
+            app:layout_constraintBottom_toBottomOf="@+id/repo_issue"
+            app:layout_constraintEnd_toStartOf="@+id/repo_issue"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/repo_watcher"
+            app:layout_constraintTop_toTopOf="@+id/repo_issue" />
+
+        <ImageView
+            android:id="@+id/repo_issue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:contentDescription="@string/repo_open_issues_description"
+            android:src="@drawable/ic_error"
+            app:layout_constraintEnd_toStartOf="@+id/repo_issue_count"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/repo_watcher_count"
+            app:layout_constraintTop_toBottomOf="@+id/repo_language" />
+
+        <TextView
+            android:id="@+id/repo_issue_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?attr/textAppearanceCaption"
+            app:layout_constraintBottom_toBottomOf="@+id/repo_issue"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/repo_issue"
+            app:layout_constraintTop_toTopOf="@+id/repo_issue" />
+
+        <ImageView
+            android:id="@+id/semaphore_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:contentDescription="@string/semaphore_icon_description"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_semaphore_text" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

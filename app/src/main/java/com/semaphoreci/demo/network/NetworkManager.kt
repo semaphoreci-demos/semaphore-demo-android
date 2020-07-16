@@ -1,5 +1,6 @@
 package com.semaphoreci.demo.network
 
+import com.google.gson.FieldNamingPolicy
 import com.google.gson.GsonBuilder
 import com.haroldadmin.cnradapter.NetworkResponseAdapterFactory
 import com.semaphoreci.demo.network.remotedatasource.RepoRemoteDataSource
@@ -11,6 +12,7 @@ object NetworkManager {
 
     private val gson = GsonBuilder()
         .setDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
+        .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
         .create()
 
     private val client: Retrofit by lazy {
