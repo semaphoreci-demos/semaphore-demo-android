@@ -15,17 +15,17 @@ blocks:
           commands:
             - checkout
             - ./gradlew lint
-  - name: 'Unit Test'
+  - name: 'Unit Testing'
     task:
       jobs:
         - name: 'run unit tests'
           commands:
             - checkout
             - ./gradlew test
-  - name: 'Integration Test'
+  - name: 'Integration Testing'
     task:
       jobs:
-        - name: 'Unit Tests'
+        - name: 'setup emulator and run integration tests'
           commands:
             - checkout
             # Install Android emulator
