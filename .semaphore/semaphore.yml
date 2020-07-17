@@ -1,13 +1,37 @@
 version: v1.0
-name: Initial Pipeline
+name: Verification Pipeline
 agent:
   machine:
     type: e1-standard-2
     os_image: ubuntu1804
+  containers:
+    - name: main
+      image: semaphoreci/android:29
 blocks:
-  - name: 'Block #1'
+  - name: 'Analyze'
     task:
       jobs:
-        - name: 'Job #1'
+        - name: 'run android linter'
           commands:
             - checkout
+            - ./gradlew lint
+  - name: 'Unit Test'
+    task:
+      jobs:
+        - name: 'run unit tests'
+          commands:
+            - checkout
+            - ./gradlew test
+  - name: 'Integration Test'
+    task:
+      jobs:
+        - name: 'Unit Tests'
+          commands:
+            - checkout
+            # Install Android emulator
+            - sdkmanager "platform-tools" "platforms;android-29" "emulator"
+            - sdkmanager "system-images;android-29;google_apis_playstore;x86"
+            - echo no | avdmanager create avd -n test -k "system-images;android-29;google_apis_playstore;x86"
+            - emulator -avd test
+            # Run tests
+            - ./gradlew connectedAndroidTest
