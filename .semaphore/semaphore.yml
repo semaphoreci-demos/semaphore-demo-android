@@ -32,6 +32,6 @@ blocks:
             - sdkmanager "platform-tools" "platforms;android-29" "emulator"
             - sdkmanager "system-images;android-29;google_apis_playstore;x86"
             - echo no | avdmanager create avd -n test -k "system-images;android-29;google_apis_playstore;x86"
-            - emulator -avd test
+            - emulator -avd test -noaudio -no-boot-anim -gpu off -no-window &
             # Run tests
             - ./gradlew connectedAndroidTest
