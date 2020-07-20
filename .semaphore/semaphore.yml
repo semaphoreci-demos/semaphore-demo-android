@@ -28,9 +28,9 @@ blocks:
         - name: 'run integration tests'
           commands:
             - checkout
-            - sdkmanager "platform-tools" "platforms;android-21" "build-tools;30.0.0" "emulator"
-            - sdkmanager "system-images;android-21;default;armeabi-v7a"
-            - echo no | avdmanager create avd -n test-emulator -k "system-images;android-21;default;armeabi-v7a"
+            - sdkmanager "platform-tools" "platforms;android-30" "build-tools;30.0.0" "emulator"
+            - sdkmanager "system-images;android-30;google_apis;x86"
+            - echo no | avdmanager create avd -n test-emulator -k "system-images;android-30;google_apis;x86"
             - emulator -avd test-emulator -noaudio -no-boot-anim -gpu off -no-window &
             - adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done;'
             - adb shell input keyevent 82 &
