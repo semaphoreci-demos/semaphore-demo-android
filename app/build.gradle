@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'com.github.triplet.play'
 
 android {
     compileSdkVersion 30
@@ -55,6 +56,12 @@ android {
     adbOptions {
         timeOutInMs 30 * 1000
     }
+}
+
+play {
+    track "beta"
+    defaultToAppBundles true
+    serviceAccountCredentials file("your-key.json")
 }
 
 dependencies {
