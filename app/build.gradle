@@ -52,10 +52,6 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
-
-    adbOptions {
-        timeOutInMs 30 * 1000
-    }
 }
 
 play {
