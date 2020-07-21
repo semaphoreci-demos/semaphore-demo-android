@@ -5,12 +5,8 @@ agent:
     type: e1-standard-2
     os_image: ubuntu1804
 
-queue:
-  name: semaphore-demo-android
-  scope: project
-
 auto_cancel:
-  running:
+  queued:
     when: "branch != 'master' AND pull_request =~ '.*'"
 
 blocks:
