@@ -1,0 +1,18 @@
+version: v1.0
+name: Verification Pipeline
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu1804
+  containers:
+    - name: main
+      image: semaphoreci/android:29
+
+blocks:
+  - name: 'Test'
+    task:
+      jobs:
+        - name: 'test job'
+          commands:
+            - checkout
+            - ./gradlew lint

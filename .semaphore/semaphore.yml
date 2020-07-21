@@ -4,34 +4,18 @@ agent:
   machine:
     type: e1-standard-2
     os_image: ubuntu1804
-  containers:
-    - name: main
-      image: semaphoreci/android:29
-blocks:
-  - name: 'Analyze'
-    task:
-      jobs:
-        - name: 'run android linter'
-          commands:
-            - checkout
-            - ./gradlew lint
-  - name: 'Unit Testing'
-    task:
-      jobs:
-        - name: 'run unit tests'
-          commands:
-            - checkout
-            - ./gradlew test
-  - name: 'Integration Testing'
-    task:
-      jobs:
-        - name: 'run integration tests'
-          commands:
-            - checkout
-            - sdkmanager "platform-tools" "platforms;android-29" "build-tools;30.0.0" "emulator"
-            - sdkmanager "system-images;android-29;google_apis;x86"
-            - echo no | avdmanager create avd -n test-emulator -k "system-images;android-29;google_apis;x86"
-            - emulator -avd test-emulator -noaudio -no-boot-anim -gpu off -no-window &
-            - adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done;'
-            - adb shell input keyevent 82 &
-            - ./gradlew connectedAndroidTest
+
+
+auto_cancel:
+  running:
+    when: "branch != 'master' AND pull_request = ''"
+
+promotions:
+  - name: Verification Pipeline
+    pipeline_file: verification-pipeline.yml
+    auto_promote:
+      when: "pull_request != ''"
+  - name: Deploy Pipeline
+    pipeline_file: deploy-pipeline.yml
+    auto_promote:
+      when: "branch = 'master'"
