@@ -8,6 +8,11 @@ agent:
     - name: main
       image: semaphoreci/android:29
 
+global_job_config:
+  prologue:
+    commands:
+      - checkout
+
 blocks:
   - name: 'Test'
     task:
