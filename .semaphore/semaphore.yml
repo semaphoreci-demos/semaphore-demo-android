@@ -20,7 +20,7 @@ global_job_config:
       - checkout
       - cache restore gradle-wrapper
       - cache restore gradle-cache
-      - cache restore gradle-build
+      - cache restore android-build
 
 blocks:
   - name: 'Build'
@@ -34,7 +34,7 @@ blocks:
             - ./gradlew assemble
             - cache store gradle-wrapper ~/.gradle/wrapper
             - cache store gradle-cache ~/.gradle/caches
-            - cache store gradle-build ~/.android/build-cache
+            - cache store android-build ~/.android/build-cache
   - name: 'Verification'
     dependencies: ["Build"]
     skip:
@@ -53,6 +53,9 @@ blocks:
             - sdkmanager "system-images;android-29;google_apis;x86"
             - echo no | avdmanager create avd -n test-emulator -k "system-images;android-29;google_apis;x86"
             - emulator -avd test-emulator -noaudio -no-boot-anim -gpu off -no-window &
+            - adb wait-for-device shell 'while [[ -z $(getprop dev.boot_completed) ]]; do sleep 1; done;'
+            - adb shell wm dismiss-keyguard
+            - sleep 1
             - ./gradlew connectedAndroidTest
   - name: 'Deployment'
     dependencies: ["Build"]
