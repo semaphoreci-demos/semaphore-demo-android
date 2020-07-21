@@ -21,7 +21,7 @@ promotions:
   - name: Verification Pipeline
     pipeline_file: verification-pipeline.yml
     auto_promote:
-      when: "pull_request != ''"
+      when: "pull_request =~ '.*'"
   - name: Deploy Pipeline
     pipeline_file: deploy-pipeline.yml
     auto_promote:
