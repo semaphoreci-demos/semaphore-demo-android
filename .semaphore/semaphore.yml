@@ -10,7 +10,7 @@ agent:
 
 auto_cancel:
   running:
-    when: "branch != 'master' OR pull_request !~ '.*'"
+    when: "branch != 'master' AND pull_request !~ '.*'"
 
 global_job_config:
   prologue:
