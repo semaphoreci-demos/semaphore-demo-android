@@ -5,10 +5,17 @@ agent:
     type: e1-standard-2
     os_image: ubuntu1804
 
-
 auto_cancel:
   running:
     when: "branch != 'master' AND pull_request = ''"
+
+blocks:
+  - name: Verification and Deployment
+    task:
+      jobs:
+        - name: Starting Build
+          commands:
+            - echo 'Build Started'
 
 promotions:
   - name: Verification Pipeline
