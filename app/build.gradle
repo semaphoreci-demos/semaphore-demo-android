@@ -20,7 +20,7 @@ android {
 
     signingConfigs {
         release {
-            storeFile file(System.getenv("SEMAPHORE_GIT_DIR") + "/release-keystore.jks")
+            storeFile file("release-keystore.jks")
             storePassword System.getenv("RELEASE_KEYSTORE_PASSWORD")
             keyAlias System.getenv("RELEASE_KEY_ALIAS")
             keyPassword System.getenv("RELEASE_KEY_PASSWORD")
