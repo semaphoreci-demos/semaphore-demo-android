@@ -22,6 +22,12 @@ blocks:
     skip:
       when: "pull_request !~ '.*'"
     task:
+      prologue:
+        commands:
+          - sdkmanager "platform-tools" "platforms;android-29" "build-tools;30.0.0" "emulator"
+          - sdkmanager "system-images;android-29;google_apis;x86"
+          - echo no | avdmanager create avd -n test_emulator -k "system-images;android-29;google_apis;x86"
+          - emulator -avd test_emulator -noaudio -no-boot-anim -gpu off -no-window &
       jobs:
         - name: 'Analyze Code'
           commands:
@@ -31,11 +37,6 @@ blocks:
             - ./gradlew test
         - name: 'Integration Tests'
           commands:
-            - sdkmanager "platform-tools" "platforms;android-29" "build-tools;30.0.0" "emulator"
-            - sdkmanager "system-images;android-29;google_apis;x86"
-            - echo no | avdmanager create avd -n test-emulator -k "system-images;android-29;google_apis;x86"
-            - emulator -avd test-emulator -noaudio -no-boot-anim -gpu off -no-window &
-            - adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done;'
             - ./gradlew connectedAndroidTest
   - name: 'Deployment'
     skip:
