@@ -1,13 +1,47 @@
 version: v1.0
-name: Initial Pipeline
+name: Verification and Deployment Pipeline
 agent:
   machine:
     type: e1-standard-2
     os_image: ubuntu1804
+  containers:
+    - name: main
+      image: semaphoreci/android:29
+
+auto_cancel:
+  running:
+    when: "branch != 'master' OR pull_request !~ '.*'"
+
+global_job_config:
+  prologue:
+    commands:
+      - checkout
+
 blocks:
-  - name: 'Block #1'
+  - name: 'Verification'
+    skip:
+      when: "pull_request !~ '.*'"
     task:
       jobs:
-        - name: 'Job #1'
+        - name: 'Analyze Code'
           commands:
-            - checkout
+            - ./gradlew lint
+        - name: 'Unit Tests'
+          commands:
+            - ./gradlew test
+        - name: 'Integration Tests'
+          commands:
+            - sdkmanager "platform-tools" "platforms;android-29" "build-tools;30.0.0" "emulator"
+            - sdkmanager "system-images;android-29;google_apis;x86"
+            - echo no | avdmanager create avd -n test-emulator -k "system-images;android-29;google_apis;x86"
+            - emulator -avd test-emulator -noaudio -no-boot-anim -gpu off -no-window &
+            - adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done;'
+            - ./gradlew connectedAndroidTest
+  - name: 'Deployment'
+    skip:
+      when: "branch != 'master'"
+    task:
+      jobs:
+        - name: "Deploy to Play Store"
+          commands:
+            - echo "TODO run deploy command here"
