@@ -16,9 +16,23 @@ global_job_config:
   prologue:
     commands:
       - checkout
+      - cache restore gradle-wrapper
+      - cache restore gradle-cache
+      - cache restore gradle-build
 
 blocks:
+  - name: 'Build'
+    dependencies: []
+    task:
+      jobs:
+        - name: 'Build Project'
+          commands:
+            - ./gradlew assemble
+            - cache store gradle-wrapper .gradle/wrapper
+            - cache store gradle-cache .gradle/caches
+            - cache store gradle-build .gradle/build-cache
   - name: 'Verification'
+    dependencies: ["Build"]
     skip:
       when: "pull_request !~ '.*'"
     task:
@@ -38,6 +52,7 @@ blocks:
             - adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done;'
             - ./gradlew connectedAndroidTest
   - name: 'Deployment'
+    dependencies: ["Build"]
     skip:
       when: "branch != 'master'"
     task:
