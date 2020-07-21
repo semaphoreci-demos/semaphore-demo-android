@@ -13,6 +13,8 @@ auto_cancel:
     when: "true"
 
 global_job_config:
+  secrets:
+    - name: android_keys
   prologue:
     commands:
       - checkout
@@ -29,7 +31,7 @@ blocks:
       jobs:
         - name: 'Build Project'
           commands:
-            - ./gradlew assemble
+            - ./gradlew build
             - cache store gradle-wrapper .gradle/wrapper
             - cache store gradle-cache .gradle/caches
             - cache store gradle-build .gradle/build-cache
