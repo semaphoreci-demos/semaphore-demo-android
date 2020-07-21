@@ -8,27 +8,29 @@ agent:
     - name: main
       image: semaphoreci/android:29
 
+global_job_config:
+  prologue:
+    commands:
+      - checkout
+
 blocks:
   - name: 'Analyze'
     task:
       jobs:
         - name: 'run android linter'
           commands:
-            - checkout
             - ./gradlew lint
   - name: 'Unit Testing'
     task:
       jobs:
         - name: 'run unit tests'
           commands:
-            - checkout
             - ./gradlew test
   - name: 'Integration Testing'
     task:
       jobs:
         - name: 'run integration tests'
           commands:
-            - checkout
             - sdkmanager "platform-tools" "platforms;android-29" "build-tools;30.0.0" "emulator"
             - sdkmanager "system-images;android-29;google_apis;x86"
             - echo no | avdmanager create avd -n test-emulator -k "system-images;android-29;google_apis;x86"

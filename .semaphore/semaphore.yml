@@ -7,7 +7,7 @@ agent:
 
 auto_cancel:
   running:
-    when: "branch != 'master' AND pull_request = ''"
+    when: "branch != 'master' AND pull_request =~ '.*'"
 
 blocks:
   - name: Verification and Deployment
