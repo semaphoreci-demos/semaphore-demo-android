@@ -1,13 +1,33 @@
 version: v1.0
-name: Initial Pipeline
+name: Main Pipeline
 agent:
   machine:
     type: e1-standard-2
     os_image: ubuntu1804
+
+auto_cancel:
+  running:
+    when: "branch != 'master' AND pull_request =~ '.*'"
+
+global_job_config:
+  prologue:
+    commands:
+      - checkout
+
 blocks:
-  - name: 'Block #1'
+  - name: Verification and Deployment
     task:
       jobs:
-        - name: 'Job #1'
+        - name: Starting Build
           commands:
-            - checkout
+            - echo 'Build Started'
+
+promotions:
+  - name: Verification Pipeline
+    pipeline_file: verification-pipeline.yml
+    auto_promote:
+      when: "pull_request =~ '.*'"
+  - name: Deploy Pipeline
+    pipeline_file: deploy-pipeline.yml
+    auto_promote:
+      when: "branch = 'master'"
