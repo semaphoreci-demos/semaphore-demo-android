@@ -53,7 +53,7 @@ blocks:
             - sdkmanager "system-images;android-29;google_apis;x86"
             - echo no | avdmanager create avd -n test-emulator -k "system-images;android-29;google_apis;x86"
             - emulator -avd test-emulator -noaudio -no-boot-anim -gpu off -no-window &
-            - adb wait-for-device shell 'while [[ -z $(getprop dev.boot_completed) ]]; do sleep 1; done;'
+            - adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done;'
             - adb shell wm dismiss-keyguard
             - sleep 1
             - ./gradlew connectedAndroidTest
