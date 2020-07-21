@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'com.github.triplet.play'
 
 android {
     compileSdkVersion 30
@@ -17,6 +18,15 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    signingConfigs {
+        release {
+            storeFile file(System.getenv("SEMAPHORE_GIT_DIR") + "/release-keystore.jks")
+            storePassword System.getenv("RELEASE_KEYSTORE_PASSWORD")
+            keyAlias System.getenv("RELEASE_KEY_ALIAS")
+            keyPassword System.getenv("RELEASE_KEY_PASSWORD")
+        }
+    }
+
     buildTypes {
         debug {
             testCoverageEnabled true
@@ -24,6 +34,7 @@ android {
 
         release {
             minifyEnabled false
+            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android-optimize' +
                     '.txt'), 'proguard-rules.pro'
         }
@@ -41,6 +52,16 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
+
+    adbOptions {
+        timeOutInMs 30 * 1000
+    }
+}
+
+play {
+    track "beta"
+    defaultToAppBundles true
+    serviceAccountCredentials file("your-key.json")
 }
 
 dependencies {
