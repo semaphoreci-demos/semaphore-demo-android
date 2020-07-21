@@ -10,7 +10,7 @@ agent:
 
 auto_cancel:
   running:
-    when: "branch != 'master' AND pull_request !~ '.*'"
+    when: "true"
 
 global_job_config:
   prologue:
@@ -23,11 +23,13 @@ global_job_config:
 blocks:
   - name: 'Build'
     dependencies: []
+    skip:
+      when: "branch != 'master' AND pull_request !~ '.*'"
     task:
       jobs:
         - name: 'Build Project'
           commands:
-            - ./gradlew assemble
+            - ./gradlew build
             - cache store gradle-wrapper .gradle/wrapper
             - cache store gradle-cache .gradle/caches
             - cache store gradle-build .gradle/build-cache
