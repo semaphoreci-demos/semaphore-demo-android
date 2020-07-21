@@ -29,7 +29,7 @@ blocks:
       jobs:
         - name: 'Build Project'
           commands:
-            - ./gradlew build
+            - ./gradlew assemble
             - cache store gradle-wrapper .gradle/wrapper
             - cache store gradle-cache .gradle/caches
             - cache store gradle-build .gradle/build-cache
