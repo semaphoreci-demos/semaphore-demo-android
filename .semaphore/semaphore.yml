@@ -31,10 +31,10 @@ blocks:
       jobs:
         - name: 'Build Project'
           commands:
-            - ./gradlew build
-            - cache store gradle-wrapper /root/gradle/wrapper
-            - cache store gradle-cache /root/gradle/caches
-            - cache store gradle-build /root/gradle/build-cache
+            - ./gradlew assemble
+            - cache store gradle-wrapper /root/.gradle/wrapper
+            - cache store gradle-cache /root/.gradle/caches
+            - cache store gradle-build /root/.gradle/build-cache
   - name: 'Verification'
     dependencies: ["Build"]
     skip:
