@@ -20,7 +20,7 @@ global_job_config:
 blocks:
   - name: 'Verification'
     skip:
-      when: "pull_request =~ '.*'"
+      when: "pull_request !~ '.*'"
     task:
       jobs:
         - name: 'Analyze Code'
@@ -39,7 +39,7 @@ blocks:
             - ./gradlew connectedAndroidTest
   - name: 'Deployment'
     skip:
-      when: "branch = 'master'"
+      when: "branch != 'master'"
     task:
       jobs:
         - name: "Deploy to Play Store"
