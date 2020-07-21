@@ -32,9 +32,9 @@ blocks:
         - name: 'Build Project'
           commands:
             - ./gradlew build
-            - cache store gradle-wrapper gradle/wrapper
-            - cache store gradle-cache gradle/caches
-            - cache store gradle-build gradle/build-cache
+            - cache store gradle-wrapper /root/gradle/wrapper
+            - cache store gradle-cache /root/gradle/caches
+            - cache store gradle-build /root/gradle/build-cache
   - name: 'Verification'
     dependencies: ["Build"]
     skip:
