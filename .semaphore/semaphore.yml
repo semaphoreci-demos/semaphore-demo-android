@@ -38,6 +38,7 @@ blocks:
             - cache store gradle-wrapper ~/.gradle/wrapper
             - cache store gradle-cache ~/.gradle/caches
             - cache store android-build ~/.android/build-cache
+
   - name: 'Verification'
     dependencies: ["Build"]
     skip:
@@ -67,6 +68,7 @@ blocks:
         always:
           commands:
             - artifact push job --expire-in 2w --destination reports/ app/build/reports/
+
   - name: 'Internal Deployment'
     dependencies: ["Build"]
     skip:
@@ -76,6 +78,7 @@ blocks:
         - name: "Deploy to Play Store - Internal"
           commands:
             - ./gradlew publishReleaseBundle --track internal
+
   - name: 'Deployment'
     dependencies: ["Build"]
     skip:
