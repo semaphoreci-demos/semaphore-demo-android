@@ -38,6 +38,7 @@ blocks:
       epilogue:
         on_pass:
           commands:
+            - cache clear
             - cache store gradle-wrapper ~/.gradle/wrapper
             - cache store gradle-cache ~/.gradle/caches
             - cache store android-build ~/.android/build-cache
