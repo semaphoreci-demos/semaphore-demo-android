@@ -26,6 +26,9 @@ class AppFlowTest {
         // Wait for request to get a response
         Thread.sleep(5000)
 
+        onView(withId(R.id.repo_list)).check(matches(isDisplayed()))
+        onView(withId(R.id.repo_list_loading)).check(matches(isDisplayed()))
+
         // Click on the first item of the list
         onView(withId(R.id.repo_list))
             .perform(actionOnItemAtPosition<RepoViewHolder>(0, click()))
