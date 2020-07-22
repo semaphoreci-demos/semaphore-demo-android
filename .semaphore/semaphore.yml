@@ -29,7 +29,7 @@ blocks:
   - name: 'Build'
     dependencies: []
     skip:
-      when: "branch != 'master' AND pull_request !~ '.*'"
+      when: "(branch != 'master' OR branch != 'dev') AND pull_request !~ '.*'"
     task:
       jobs:
         - name: 'Build Project'
@@ -67,12 +67,21 @@ blocks:
         always:
           commands:
             - artifact push job --expire-in 2w --destination reports/ app/build/reports/
+  - name: 'Internal Deployment'
+    dependencies: ["Build"]
+    skip:
+      when: "branch != 'dev'"
+    task:
+      jobs:
+        - name: "Deploy to Play Store - Internal"
+          commands:
+            - ./gradlew publishReleaseBundle --track internal
   - name: 'Deployment'
     dependencies: ["Build"]
     skip:
       when: "branch != 'master'"
     task:
       jobs:
-        - name: "Deploy to Play Store"
+        - name: "Deploy to Play Store - Beta"
           commands:
-            - echo "TODO run deploy command here"
+            - ./gradlew publishReleaseBundle --track beta

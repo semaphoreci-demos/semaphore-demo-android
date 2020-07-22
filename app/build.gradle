@@ -55,8 +55,8 @@ android {
 }
 
 play {
-    track "alpha"
-    fromTrack "alpha"
+    track "internal"
+    fromTrack "internal"
     promoteTrack "beta"
     defaultToAppBundles true
     serviceAccountCredentials file("app/service-account-key.json")
