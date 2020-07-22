@@ -63,6 +63,13 @@ blocks:
             - adb shell settings put global animator_duration_scale 0
             - sleep 1
             - ./gradlew connectedAndroidTest
+        - name: 'Check Test Coverage'
+          commands:
+            - ./gradlew createDebugCoverageReport
+      epilogue:
+        always:
+          commands:
+            - artifact push job --expire-in 2w --destination reports/ app/build/reports/
   - name: 'Deployment'
     dependencies: ["Build"]
     skip:
