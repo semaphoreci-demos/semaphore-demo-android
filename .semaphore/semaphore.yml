@@ -35,6 +35,9 @@ blocks:
         - name: 'Build Project'
           commands:
             - ./gradlew assemble
+      epilogue:
+        on_pass:
+          commands:
             - cache store gradle-wrapper ~/.gradle/wrapper
             - cache store gradle-cache ~/.gradle/caches
             - cache store android-build ~/.android/build-cache
