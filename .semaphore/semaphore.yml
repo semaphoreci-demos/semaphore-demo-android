@@ -1,13 +1,82 @@
 version: v1.0
-name: Initial Pipeline
+name: Verification Pipeline
 agent:
   machine:
     type: e1-standard-2
     os_image: ubuntu1804
+  containers:
+    - name: main
+      image: semaphoreci/android:29
+
+auto_cancel:
+  running:
+    when: "true"
+
+global_job_config:
+  env_vars:
+    - name: ADB_INSTALL_TIMEOUT
+      value: "10"
+  secrets:
+    - name: android_keys
+  prologue:
+    commands:
+      - checkout
+      - cache restore gradle-wrapper
+      - cache restore gradle-cache
+      - cache restore android-build
+
 blocks:
-  - name: 'Block #1'
+  - name: 'Build'
+    skip:
+      when: "(branch != 'master' OR branch != 'dev') AND pull_request !~ '.*'"
     task:
       jobs:
-        - name: 'Job #1'
+        - name: 'Build Project'
           commands:
-            - checkout
+            - ./gradlew bundle
+      epilogue:
+        on_pass:
+          commands:
+            - cache clear
+            - cache store gradle-wrapper ~/.gradle/wrapper
+            - cache store gradle-cache ~/.gradle/caches
+            - cache store android-build ~/.android/build-cache
+
+  - name: 'Verification'
+    skip:
+      when: "pull_request !~ '.*'"
+    task:
+      jobs:
+        - name: 'Analyze Code'
+          commands:
+            - ./gradlew lint
+        - name: 'Unit Tests'
+          commands:
+            - ./gradlew test
+        - name: 'Integration Tests'
+          commands:
+            - sdkmanager "platform-tools" "platforms;android-29" "build-tools;30.0.0" "emulator"
+            - sdkmanager "system-images;android-29;google_apis;x86"
+            - echo no | avdmanager create avd -n test-emulator -k "system-images;android-29;google_apis;x86"
+            - emulator -avd test-emulator -noaudio -no-boot-anim -gpu off -no-window &
+            - adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done;'
+            - adb shell settings put secure show_ime_with_hard_keyboard 0
+            - adb shell settings put global window_animation_scale 0
+            - adb shell settings put global transition_animation_scale 0
+            - adb shell settings put global animator_duration_scale 0
+            - sleep 1
+            #- ./gradlew connectedAndroidTest
+      epilogue:
+        always:
+          commands:
+            - artifact push job --expire-in 2w --destination reports/ app/build/reports/
+
+promotions:
+  - name: Internal Deploy
+    pipeline_file: deploy-internal.yml
+    auto_promote:
+      when: "result = 'passed' AND branch = 'dev'"
+  - name: Beta Deploy
+    pipeline_file: deploy-beta.yml
+    auto_promote:
+      when: "result = 'passed' AND branch = 'master'"
