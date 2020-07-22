@@ -2,6 +2,7 @@ package com.semaphoreci.demo.ui
 
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.assertion.ViewAssertions.doesNotExist
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
@@ -23,8 +24,14 @@ class AppFlowTest {
 
     @Test
     fun appFlowTest() {
+        onView(withId(R.id.repo_list)).check(doesNotExist())
+        onView(withId(R.id.repo_list_loading)).check(matches(isDisplayed()))
+
         // Wait for request to get a response
-        Thread.sleep(3000)
+        Thread.sleep(5000)
+
+        onView(withId(R.id.repo_list)).check(matches(isDisplayed()))
+        onView(withId(R.id.repo_list_loading)).check(doesNotExist())
 
         // Click on the first item of the list
         onView(withId(R.id.repo_list))
