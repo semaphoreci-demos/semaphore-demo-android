@@ -11,7 +11,6 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.semaphoreci.demo.R
 import com.semaphoreci.demo.ui.repolist.RepoListActivity
 import com.semaphoreci.demo.ui.repolist.RepoViewHolder
-import org.hamcrest.Matchers.not
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -24,14 +23,8 @@ class AppFlowTest {
 
     @Test
     fun appFlowTest() {
-        onView(withId(R.id.repo_list_loading)).check(matches(isDisplayed()))
-        onView(withId(R.id.repo_list)).check(matches(not(isDisplayed())))
-
         // Wait for request to get a response
         Thread.sleep(10000)
-
-        onView(withId(R.id.repo_list_loading)).check(matches(not(isDisplayed())))
-        onView(withId(R.id.repo_list)).check(matches(isDisplayed()))
 
         // Click on the first item of the list
         onView(withId(R.id.repo_list))
