@@ -24,7 +24,7 @@ class AppFlowTest {
     @Test
     fun appFlowTest() {
         // Wait for request to get a response
-        Thread.sleep(3000)
+        Thread.sleep(10000)
 
         // Click on the first item of the list
         onView(withId(R.id.repo_list))
