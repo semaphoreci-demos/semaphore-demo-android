@@ -74,3 +74,6 @@ lint/generated/
 lint/outputs/
 lint/tmp/
 lint/reports/
+
+# keys
+/app/service-account-key.json
