@@ -18,6 +18,8 @@ global_job_config:
   prologue:
     commands:
       - checkout
+      - base64 -d $RELEASE_KEYSTORE > app/release-keystore.jks
+      - base64 -d $SERVICE_ACCOUNT > app/service-account-key.json
       - cache restore gradle-wrapper
       - cache restore gradle-cache
       - cache restore android-build
@@ -28,5 +30,4 @@ blocks:
       jobs:
         - name: "Deploy to Play Store - Beta Track"
           commands:
-            - echo $SERVICE_ACCOUNT > app/service-account-key.json
             - ./gradlew publishReleaseBundle --track beta
