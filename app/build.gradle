@@ -59,7 +59,7 @@ play {
     fromTrack "internal"
     promoteTrack "beta"
     defaultToAppBundles true
-    serviceAccountCredentials file("app/service-account-key.json")
+    serviceAccountCredentials file("service-account-key.json")
 }
 
 dependencies {
