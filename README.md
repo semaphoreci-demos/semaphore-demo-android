@@ -27,6 +27,6 @@ project](https://docs.semaphoreci.com/guided-tour/creating-your-first-project/).
   [Semaphore Secrets](https://docs.semaphoreci.com/essentials/using-secrets/).
 
 ## License
-Copyright (c) 2019 Rendered Text
+Copyright (c) 2020 Rendered Text
 
 Distributed under the MIT License. See the file [LICENSE](LICENSE).
