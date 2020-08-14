@@ -27,4 +27,8 @@ blocks:
         - name: "Deploy to Play Store - Internal Track"
           commands:
             - echo "deploy to internal track"
-
+promotions:
+  - name: Beta Deploy
+    pipeline_file: deploy-beta.yml
+    auto_promote:
+      when: "result = 'passed' AND branch = 'main'"
