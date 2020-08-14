@@ -30,4 +30,5 @@ blocks:
       jobs:
         - name: "Deploy to Play Store - Internal Track"
           commands:
-            - ./gradlew publishReleaseBundle --track internal
+            - echo "deploy to internal track"
+
