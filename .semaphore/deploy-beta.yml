@@ -13,13 +13,9 @@ auto_cancel:
     when: "true"
 
 global_job_config:
-  secrets:
-    - name: android_keys
   prologue:
     commands:
       - checkout
-      - mv ~/release-keystore.jks ~/$SEMAPHORE_GIT_DIR/app/release-keystore.jks
-      - mv ~/service-account-key.json ~/$SEMAPHORE_GIT_DIR/app/service-account-key.json
       - cache restore gradle-wrapper
       - cache restore gradle-cache
       - cache restore android-build
