@@ -16,25 +16,20 @@ global_job_config:
   env_vars:
     - name: ADB_INSTALL_TIMEOUT
       value: "10"
-  secrets:
-    - name: android_keys
   prologue:
     commands:
       - checkout
-      - mv ~/release-keystore.jks ~/$SEMAPHORE_GIT_DIR/app/release-keystore.jks
       - cache restore gradle-wrapper
       - cache restore gradle-cache
       - cache restore android-build
 
 blocks:
   - name: 'Build'
-    skip:
-      when: "(branch != 'master' OR branch != 'dev') AND pull_request !~ '.*'"
     task:
       jobs:
         - name: 'Build Project'
           commands:
-            - ./gradlew bundle
+            - ./gradlew bundleDebug
       epilogue:
         on_pass:
           commands:
@@ -53,7 +48,7 @@ blocks:
             - ./gradlew lint
         - name: 'Unit Tests'
           commands:
-            - ./gradlew test
+            - ./gradlew testDebugUnitTest
         - name: 'Integration Tests'
           commands:
             - sdkmanager "platform-tools" "platforms;android-29" "build-tools;30.0.0" "emulator"
@@ -66,7 +61,7 @@ blocks:
             - adb shell settings put global window_animation_scale 0
             - adb shell settings put global transition_animation_scale 0
             - adb shell settings put global animator_duration_scale 0
-            - ./gradlew connectedAndroidTest
+            - ./gradlew connectedDebugAndroidTest
       epilogue:
         always:
           commands:
@@ -76,8 +71,4 @@ promotions:
   - name: Internal Deploy
     pipeline_file: deploy-internal.yml
     auto_promote:
-      when: "result = 'passed' AND branch = 'dev'"
-  - name: Beta Deploy
-    pipeline_file: deploy-beta.yml
-    auto_promote:
-      when: "result = 'passed' AND branch = 'master'"
+      when: "result = 'passed' AND branch = 'main'"
