@@ -30,4 +30,4 @@ blocks:
       jobs:
         - name: "Deploy to Play Store - Beta Track"
           commands:
-            - ./gradlew publishReleaseBundle --track beta
+            - echo "deploy to beta track"
