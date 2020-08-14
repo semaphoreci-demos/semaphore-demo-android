@@ -39,8 +39,6 @@ blocks:
             - cache store android-build ~/.android/build-cache
 
   - name: 'Verification'
-    skip:
-      when: "pull_request !~ '.*'"
     task:
       jobs:
         - name: 'Analyze Code'
