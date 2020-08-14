@@ -13,8 +13,6 @@ auto_cancel:
     when: "true"
 
 global_job_config:
-  secrets:
-    - name: android_keys
   prologue:
     commands:
       - checkout
