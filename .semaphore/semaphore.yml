@@ -40,18 +40,7 @@ blocks:
         - name: Unit Tests
           commands:
             - ./gradlew testDebugUnitTest
-      epilogue:
-        always:
-          commands:
-            - artifact push job --expire-in 2w --destination reports/ app/build/reports/
-  - name: Integration tests
-    task:
-      epilogue:
-        always:
-          commands:
-            - artifact push job --expire-in 2w --destination reports/ app/build/reports/
-      jobs:
-        - name: Integration tests
+        - name: Integration Tests
           commands:
             - sdkmanager "platform-tools" "platforms;android-29" "build-tools;30.0.0" "emulator"
             - sdkmanager "system-images;android-29;google_apis;x86"
@@ -64,6 +53,10 @@ blocks:
             - adb shell settings put global transition_animation_scale 0
             - adb shell settings put global animator_duration_scale 0
             - ./gradlew connectedDebugAndroidTest
+      epilogue:
+        always:
+          commands:
+            - artifact push job --expire-in 2w --destination reports/ app/build/reports/
 promotions:
   - name: Internal Deploy
     pipeline_file: deploy-internal.yml
