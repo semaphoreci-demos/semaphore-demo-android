@@ -6,12 +6,7 @@ agent:
     os_image: ubuntu1804
   containers:
     - name: main
-      image: semaphoreci/android:29
-
-auto_cancel:
-  running:
-    when: "true"
-
+      image: 'semaphoreci/android:29'
 global_job_config:
   prologue:
     commands:
@@ -19,16 +14,15 @@ global_job_config:
       - cache restore gradle-wrapper
       - cache restore gradle-cache
       - cache restore android-build
-
 blocks:
-  - name: 'Internal Deployment'
+  - name: Internal Deployment
     task:
       jobs:
-        - name: "Deploy to Play Store - Internal Track"
+        - name: Deploy to Play Store - Internal Track
           commands:
             - echo "deploy to internal track"
 promotions:
   - name: Beta Deploy
     pipeline_file: deploy-beta.yml
     auto_promote:
-      when: "result = 'passed' AND branch = 'main'"
+      when: result = 'passed' AND branch = 'main'
