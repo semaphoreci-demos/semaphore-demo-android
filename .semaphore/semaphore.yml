@@ -47,5 +47,3 @@ blocks:
 promotions:
   - name: Start Integration tests
     pipeline_file: integration-tests.yml
-    auto_promote:
-      when: result = 'passed' AND branch = 'fork-and-run'
