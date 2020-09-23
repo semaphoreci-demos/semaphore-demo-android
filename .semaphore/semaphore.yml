@@ -40,25 +40,12 @@ blocks:
         - name: Unit Tests
           commands:
             - ./gradlew testDebugUnitTest
-        - name: Integration Tests
-          commands:
-            - sdkmanager "platform-tools" "platforms;android-29" "build-tools;30.0.0" "emulator"
-            - sdkmanager "system-images;android-29;google_apis;x86"
-            - echo no | avdmanager create avd -n test-emulator -k "system-images;android-29;google_apis;x86"
-            - emulator -avd test-emulator -noaudio -no-boot-anim -gpu off -no-window &
-            - 'adb wait-for-device shell ''while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done;'''
-            - adb shell wm dismiss-keyguard
-            - sleep 1
-            - adb shell settings put global window_animation_scale 0
-            - adb shell settings put global transition_animation_scale 0
-            - adb shell settings put global animator_duration_scale 0
-            - ./gradlew connectedDebugAndroidTest
       epilogue:
         always:
           commands:
             - artifact push job --expire-in 2w --destination reports/ app/build/reports/
 promotions:
-  - name: Internal Deploy
-    pipeline_file: deploy-internal.yml
+  - name: Run Integration tests
+    pipeline_file: integration-tests.yml
     auto_promote:
-      when: result = 'passed' AND branch = 'main'
+      when: result = 'passed' AND branch = 'fork-and-run'
