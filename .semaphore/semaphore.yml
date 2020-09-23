@@ -45,7 +45,7 @@ blocks:
           commands:
             - artifact push job --expire-in 2w --destination reports/ app/build/reports/
 promotions:
-  - name: Run Integration tests
+  - name: Start Integration tests
     pipeline_file: integration-tests.yml
     auto_promote:
       when: result = 'passed' AND branch = 'fork-and-run'
