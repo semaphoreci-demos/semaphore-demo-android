@@ -18,4 +18,4 @@ project](https://docs.semaphoreci.com/guided-tour/creating-your-first-project/).
 ## License
 Copyright (c) 2020 Rendered Text
 
-Distributed under the MIT License. See the file [LICENSE](LICENSE).
+Distributed under the MIT License. See the file [LICENSE](LICENSE).  
