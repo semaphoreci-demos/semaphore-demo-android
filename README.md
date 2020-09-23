@@ -14,7 +14,6 @@ project](https://docs.semaphoreci.com/guided-tour/creating-your-first-project/).
 
 ![Verification Pipeline](images/simplified.png)
 
-
 ## License
 Copyright (c) 2020 Rendered Text
 
