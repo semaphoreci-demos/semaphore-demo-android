@@ -52,6 +52,7 @@ blocks:
         machine:
           type: e1-standard-4
           os_image: ubuntu1804
+    dependencies: []
   - name: Verification
     skip:
       when: pull_request !~ '.*'
@@ -80,6 +81,44 @@ blocks:
         always:
           commands:
             - artifact push job --expire-in 2w --destination reports/ app/build/reports/
+    dependencies:
+      - Build
+  - name: Packet
+    skip:
+      when: Dev​
+    dependencies:
+      - Build
+      - Verification
+    task:
+      env_vars:
+        - name: FOO_1
+          value: BAR_1
+      epilogue:
+        always:
+          commands:
+            - Alway
+        on_pass:
+          commands:
+            - On_pass
+        on_fail:
+          commands:
+            - On_fail
+      agent:
+        machine:
+          type: e1-standard-2
+          os_image: ubuntu1804
+      jobs:
+        - name: 'Job #1'
+          commands: []
+          matrix:
+            - env_var: FOO
+              values:
+                - value1
+                - value2
+            - env_var: BAR
+              values:
+                - value1
+                - script​value2
 promotions:
   - name: Internal Deploy
     pipeline_file: deploy-internal.yml
@@ -89,3 +128,7 @@ promotions:
     pipeline_file: deploy-beta.yml
     auto_promote:
       when: result = 'passed' AND branch = 'master'
+  - name: Promotion 3
+    pipeline_file: pipeline_4.yml
+    auto_promote:
+      when: branch = 'master' AND result = 'passed'
