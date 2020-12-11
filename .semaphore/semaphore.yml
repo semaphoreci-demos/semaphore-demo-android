@@ -18,7 +18,7 @@ global_job_config:
       - cache restore gradle-cache
       - cache restore android-build
 blocks:
-  - name: Build
+  - name: Zen1
     task:
       jobs:
         - name: Build Project
