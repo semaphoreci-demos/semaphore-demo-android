@@ -18,12 +18,21 @@ global_job_config:
       - cache restore gradle-cache
       - cache restore android-build
 blocks:
-  - name: Zen1
+  - name: Build
     task:
       jobs:
         - name: Build Project
           commands:
             - ./gradlew bundleDebug
+          matrix:
+            - env_var: FOO
+              values:
+                - value1
+                - value2
+            - env_var: BAR
+              values:
+                - value1
+                - value2
       epilogue:
         on_pass:
           commands:
