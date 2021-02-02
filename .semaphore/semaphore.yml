@@ -31,6 +31,7 @@ blocks:
             - cache store gradle-wrapper ~/.gradle/wrapper
             - cache store gradle-cache ~/.gradle/caches
             - cache store android-build ~/.android/build-cache
+    dependencies: []
   - name: Verification
     task:
       jobs:
@@ -44,6 +45,18 @@ blocks:
         always:
           commands:
             - artifact push job --expire-in 2w --destination reports/ app/build/reports/
+    dependencies:
+      - Build
+  - name: Block Chi
+    dependencies:
+      - Build
+      - Verification
+    task:
+      jobs:
+        - name: Job chi
+          commands: []
 promotions:
   - name: Start Integration tests
     pipeline_file: integration-tests.yml
+  - name: Promotion 2
+    pipeline_file: pipeline_3.yml
