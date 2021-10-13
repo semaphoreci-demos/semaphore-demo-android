@@ -1,0 +1,119 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">#029D74</item>
+        <item name="colorPrimaryVariant">#0AB488</item>
+        <item name="colorOnPrimary">#FFFFFF</item>
+        <item name="colorSecondary">#F16332</item>
+        <item name="colorSecondaryVariant">#F8A27B</item>
+        <item name="colorOnSecondary">#FFFFFF</item>
+        <item name="android:colorBackground">#FFFFFF</item>
+        <item name="colorOnBackground">#212121</item>
+        <item name="colorSurface">#E8E8E8</item>
+        <item name="colorOnSurface">#FFFFFF</item>
+        <item name="colorError">#B00020</item>
+        <item name="colorOnError">#FFFFFF</item>
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">
+            true
+        </item>
+
+        <item name="textAppearanceHeadline1">@style/AppTheme.Headline1</item>
+        <item name="textAppearanceHeadline2">@style/AppTheme.Headline2</item>
+        <item name="textAppearanceHeadline3">@style/AppTheme.Headline3</item>
+        <item name="textAppearanceHeadline4">@style/AppTheme.Headline4</item>
+        <item name="textAppearanceHeadline5">@style/AppTheme.Headline5</item>
+        <item name="textAppearanceHeadline6">@style/AppTheme.Headline6</item>
+        <item name="textAppearanceSubtitle1">@style/AppTheme.Subtitle1</item>
+        <item name="textAppearanceSubtitle2">@style/AppTheme.Subtitle2</item>
+        <item name="textAppearanceBody1">@style/AppTheme.Body1</item>
+        <item name="textAppearanceBody2">@style/AppTheme.Body2</item>
+        <item name="textAppearanceCaption">@style/AppTheme.Caption</item>
+        <item name="textAppearanceButton">@style/AppTheme.Button</item>
+        <item name="textAppearanceOverline">@style/AppTheme.Overline</item>
+
+        <item name="toolbarStyle">@style/AppTheme.Toolbar</item>
+    </style>
+
+    <style name="AppTheme.Headline1" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="fontFamily">@font/montserrat</item>
+        <item name="android:textSize">58sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="AppTheme.Headline2" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="fontFamily">@font/montserrat</item>
+        <item name="android:textSize">38sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="AppTheme.Headline3" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="fontFamily">@font/montserrat</item>
+        <item name="android:textSize">28sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="AppTheme.Headline4" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="fontFamily">@font/montserrat</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="AppTheme.Headline5" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="fontFamily">@font/montserrat</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="AppTheme.Headline6" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="fontFamily">@font/montserrat</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="AppTheme.Subtitle1" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="fontFamily">@font/montserrat</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="AppTheme.Subtitle2" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="fontFamily">@font/montserrat</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="AppTheme.Body1" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="fontFamily">@font/montserrat</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="AppTheme.Body2" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="fontFamily">@font/montserrat</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="AppTheme.Caption" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="fontFamily">@font/montserrat</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="AppTheme.Button" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="fontFamily">@font/montserrat</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="AppTheme.Overline" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="fontFamily">@font/montserrat</item>
+        <item name="android:textSize">10sp</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="AppTheme.Toolbar" parent="Widget.MaterialComponents.Toolbar">
+        <item name="titleTextColor">#FFFFFF</item>
+    </style>
+</resources>

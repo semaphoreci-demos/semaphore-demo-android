@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name" translatable="false">Semaphore Demo</string>
+
+    <string name="repo_list_title">Semaphore Demo Repos</string>
+    <string name="repo_list_error">Some error happened while fetching repos</string>
+    <string name="repo_forks_description">Forks</string>
+    <string name="repo_stars_description">Stars</string>
+    <string name="repo_watchers_description">Watchers</string>
+    <string name="repo_open_issues_description">Open Issues</string>
+    <string name="repo_creation_date_label">Created:</string>
+    <string name="repo_updated_date_label">Last Updated:</string>
+    <string name="repo_home_button">Home</string>
+    <string name="repo_git_button">GitHub</string>
+    <string name="semaphore_icon_description">Semaphore</string>
+</resources>
