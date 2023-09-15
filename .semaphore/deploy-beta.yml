@@ -7,11 +7,9 @@ agent:
   containers:
     - name: main
       image: 'registry.semaphoreci.com/android:29'
-
 auto_cancel:
   running:
-    when: "true"
-
+    when: 'true'
 global_job_config:
   secrets:
     - name: android_keys
@@ -23,11 +21,10 @@ global_job_config:
       - cache restore gradle-wrapper
       - cache restore gradle-cache
       - cache restore android-build
-
 blocks:
-  - name: 'Internal Deployment'
+  - name: Internal Deployment
     task:
       jobs:
-        - name: "Deploy to Play Store - Beta Track"
+        - name: Deploy to Play Store - Beta Track
           commands:
             - ./gradlew publishReleaseBundle --track beta
