@@ -96,7 +96,7 @@ dependencies {
     implementation 'com.github.haroldadmin:NetworkResponseAdapter:4.0.1'
 
     // Testing
-    def mockk_version = "1.10.0"
+    def mockk_version = "1.13.8"
     def core_testing_version = "1.2.0"
     def espresso_version = "3.2.0"
 

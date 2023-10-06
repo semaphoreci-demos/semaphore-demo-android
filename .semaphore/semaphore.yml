@@ -50,10 +50,10 @@ blocks:
       jobs:
         - name: 'Analyze Code'
           commands:
-            - ./gradlew lint
+            - ./gradlew lint --stacktrace
         - name: 'Unit Tests'
           commands:
-            - ./gradlew test
+            - ./gradlew test --stacktrace
         - name: 'Integration Tests'
           commands:
             - sdkmanager "platform-tools" "platforms;android-33" "build-tools;33.0.2" "emulator"
@@ -66,7 +66,7 @@ blocks:
             - adb shell settings put global window_animation_scale 0
             - adb shell settings put global transition_animation_scale 0
             - adb shell settings put global animator_duration_scale 0
-            - ./gradlew connectedAndroidTest
+            - ./gradlew connectedAndroidTest --stacktrace
       epilogue:
         always:
           commands:
