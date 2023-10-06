@@ -34,7 +34,7 @@ blocks:
       jobs:
         - name: 'Build Project'
           commands:
-            - ./gradlew bundle
+            - ./gradlew bundle --stacktrace
       epilogue:
         on_pass:
           commands:
