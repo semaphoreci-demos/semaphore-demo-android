@@ -3,10 +3,10 @@ name: Verification Pipeline
 agent:
   machine:
     type: e1-standard-2
-    os_image: ubuntu1804
+    os_image: ubuntu2004
   containers:
     - name: main
-      image: 'registry.semaphoreci.com/android:29'
+      image: 'registry.semaphoreci.com/android:33'
 
 auto_cancel:
   running:
@@ -34,7 +34,7 @@ blocks:
       jobs:
         - name: 'Build Project'
           commands:
-            - ./gradlew bundle
+            - ./gradlew bundle --stacktrace
       epilogue:
         on_pass:
           commands:
@@ -50,15 +50,15 @@ blocks:
       jobs:
         - name: 'Analyze Code'
           commands:
-            - ./gradlew lint
+            - ./gradlew lint --stacktrace
         - name: 'Unit Tests'
           commands:
-            - ./gradlew test
+            - ./gradlew test --stacktrace
         - name: 'Integration Tests'
           commands:
-            - sdkmanager "platform-tools" "platforms;android-29" "build-tools;30.0.0" "emulator"
-            - sdkmanager "system-images;android-29;google_apis;x86"
-            - echo no | avdmanager create avd -n test-emulator -k "system-images;android-29;google_apis;x86"
+            - sdkmanager "platform-tools" "platforms;android-33" "build-tools;33.0.2" "emulator"
+            - sdkmanager "system-images;android-33;google_apis;x86"
+            - echo no | avdmanager create avd -n test-emulator -k "system-images;android-33;google_apis;x86"
             - emulator -avd test-emulator -noaudio -no-boot-anim -gpu off -no-window &
             - adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done;'
             - adb shell wm dismiss-keyguard
@@ -66,7 +66,7 @@ blocks:
             - adb shell settings put global window_animation_scale 0
             - adb shell settings put global transition_animation_scale 0
             - adb shell settings put global animator_duration_scale 0
-            - ./gradlew connectedAndroidTest
+            - ./gradlew connectedAndroidTest --stacktrace
       epilogue:
         always:
           commands:
